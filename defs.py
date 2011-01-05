@@ -12,8 +12,8 @@ import os
 # Constants
 # -----------------------------------------------------------------------------
 
-BLOG_NAME = 'PicoBlog'
-CANONICAL_BLOG_URL = 'http://picoblog.appspot.com/'
+BLOG_NAME = 'Elephant entropy'
+CANONICAL_BLOG_URL = 'http://elephantropy.appspot.com/'
 BLOG_OWNER = 'Joe Example'
 
 TEMPLATE_SUBDIR = 'templates'
@@ -35,3 +35,14 @@ if _server_software.startswith('goog'):
 else:
     ON_GAE = False
 del _server_software
+
+GA_KEY = ''
+
+# -----------------------------------------------------------------------------
+# Constants
+# -----------------------------------------------------------------------------
+
+PING_TECHNORATI = False
+TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
+FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock/'
+

@@ -1,29 +1,105 @@
-/*
-  Some CSS trickery to get the border around the entire page. 
-  See http://www.dave-woods.co.uk/?p=144
-*/
-html, body
+body
 {
-    background-color: #dddddd;
-    height: 98%;
-    font-size: 12pt;
-}
-
-#container
-{
-    font-family: Arial, Verdana, Helvetica, sans serif;
-    min-height: 98%;
-    width: 70%;
     background-color: white;
-    border: 1px solid black;
-    align: center;
-    margin: 0 auto;
+    font-size: 12pt;
+    font-family: Arial, Verdana, Helvetica, sans serif;
+    margin: 0;
+    line-height: 1.5em;
 }
 
-* html #container
+.header
 {
-    height: 98%;
-    width: 70%;
+/*    background-color: lightgrey; */
+    padding-top: 2em;
+    padding-bottom: 0;
+}
+
+.header h1
+{
+    margin: 0;
+}
+
+.content_container {
+    padding-top: 1em;
+    margin-top: 2em;
+    background-color: white;
+    border-radius: 0.5em;
+
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50em;
+}
+
+.about {
+    float: right;
+    margin: 1em;
+    padding: 1em;
+    background-color: lightgrey;
+    display: inline-block;
+}
+
+h1 a
+{
+    text-decoration: none;
+}
+
+h2 a
+{
+    text-decoration: none;
+}
+
+p {
+}
+
+.content
+{
+    /*padding-left: 2em;*/
+    /*padding-right: 2em;*/
+    padding-top: 1em;
+/*    background-color: lightblue; */
+}
+
+h2
+{
+    margin: 0;
+}
+
+.content .article
+{
+    padding-bottom: 2em;
+}
+
+.article_info
+{
+    font-size: 75%;
+}
+
+.tag
+{
+    background-color: lightblue;
+    border-radius: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.timestamp
+{
+    color: gray;
+}
+
+/* Footer */
+
+.info_container {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.info {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50em;
 }
 
 /* The other stuff */
@@ -45,18 +121,6 @@ div.admin-page-area
 div.admin-page-area input
 {
     margin-left: 0;
-}
-
-span.blog_name
-{
-    color: #dddddd;
-    font-size: 42pt;
-}
-
-span.blog_owner
-{
-    color: #dddddd;
-    font-style: italic;
 }
 
 li.admin-draft
@@ -83,15 +147,6 @@ li.admin-published a
 {
     border: 1px solid #dddddd;
     padding: 1em;
-}
-
-.timestamp
-{
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 75%;
-    padding-left: 2em;
-    color: gray;
-    text-align: right;
 }
 
 table.article

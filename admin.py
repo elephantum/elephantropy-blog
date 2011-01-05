@@ -20,13 +20,6 @@ import request
 import defs
 
 # -----------------------------------------------------------------------------
-# Constants
-# -----------------------------------------------------------------------------
-
-TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
-FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock/'
-
-# -----------------------------------------------------------------------------
 # Classes
 # -----------------------------------------------------------------------------
 
@@ -139,9 +132,9 @@ class DeleteArticleHandler(request.BlogRequestHandler):
 
 def ping_technorati():
     if defs.ON_GAE:
-        url = TECHNORATI_PING_RPC_URL
+        url = defs.TECHNORATI_PING_RPC_URL
     else:
-        url = FAKE_TECHNORATI_PING_RPC_URL
+        url = defs.FAKE_TECHNORATI_PING_RPC_URL
 
     logging.debug('Pinging Technorati at: %s' % url)
     try:
@@ -160,7 +153,8 @@ def ping_technorati():
 
 def alert_the_media():
     # Right now, we only alert Technorati
-    ping_technorati()
+    if defs.PING_TECHNORATI:
+        ping_technorati()
 
 # -----------------------------------------------------------------------------
 # Main program
