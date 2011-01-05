@@ -199,22 +199,26 @@ class AbstractPageHandler(request.BlogRequestHandler):
         media_path = '/' + defs.MEDIA_URL_PATH
         media_url = url_prefix + media_path
 
-        template_variables = {'blog_name'    : defs.BLOG_NAME,
-                              'blog_owner'   : defs.BLOG_OWNER,
-                              'articles'     : articles,
-                              'tag_list'     : self.get_tag_counts(),
-                              'date_list'    : self.get_month_counts(),
-                              'version'      : '0.3',
-                              'last_updated' : last_updated,
-                              'blog_path'    : '/',
-                              'blog_url'     : blog_url,
-                              'archive_path' : '/' + defs.ARCHIVE_URL_PATH,
-                              'tag_path'     : tag_path,
-                              'tag_url'      : tag_url,
-                              'date_path'    : date_path,
-                              'date_url'     : date_url,
-                              'rss2_path'    : '/' + defs.RSS2_URL_PATH,
-                              'recent'       : recent}
+        template_variables = {
+        	'blog_name'    : defs.BLOG_NAME,
+			'blog_owner'   : defs.BLOG_OWNER,
+            'tag_list'     : self.get_tag_counts(),
+            'date_list'    : self.get_month_counts(),
+            'version'      : '0.3',
+            'last_updated' : last_updated,
+            'blog_path'    : '/',
+            'blog_url'     : blog_url,
+            'archive_path' : '/' + defs.ARCHIVE_URL_PATH,
+            'tag_path'     : tag_path,
+            'tag_url'      : tag_url,
+            'date_path'    : date_path,
+            'date_url'     : date_url,
+            'rss2_path'    : '/' + defs.RSS2_URL_PATH,
+            
+            'recent'       : recent,
+            
+        	'articles'     : articles,
+            }
 
         return self.render_template(template_name, template_variables)
 
@@ -246,7 +250,8 @@ class FrontPageHandler(AbstractPageHandler):
 
         self.response.out.write(self.render_articles(articles,
                                                      self.request,
-                                                     self.get_recent()))
+                                                     self.get_recent(),
+                                                     template_name='index.html'))
 
 class ArticlesByTagHandler(AbstractPageHandler):
     """
@@ -278,7 +283,7 @@ class SingleArticleHandler(AbstractPageHandler):
     def get(self, id):
         article = Article.get(int(id))
         if article:
-            template = 'show-articles.html'
+            template = 'article.html'
             articles = [article]
             more = None
         else:

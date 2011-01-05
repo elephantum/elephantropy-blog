@@ -6,16 +6,19 @@
 <link href="/static/style.css" rel="stylesheet" type="text/css"/>
 </head>
 
-{% include "analytics.html" %}
+{% include "inc/analytics.html" %}
 
 <body>
 
-{% include "info.html" %}
+{% include "inc/info.html" %}
 
 <div class="content_container">
   <div class="content">
-    {% block main %}{% endblock %}
+	{% for article in articles %}
+  	  {% include "inc/article.html" %}
+	{% endfor %}
   </div>
 </div>
 
+</body>
 </html>

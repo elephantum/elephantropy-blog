@@ -1,0 +1,14 @@
+<div class="article">
+  <h2><a href="{{ article.path }}">{{ article.title }}</a></h2>
+  
+  <span class="article_info">
+    <span class="timestamp">{{ article.published_when|date:"j F, Y \a\t g:i A" }}</span>
+    <span class="tag_list">
+    {% for tag in article.tags %}
+      <span class="tag">{{ tag }}</span>
+    {% endfor %}
+    </span>
+  </span>
+
+  {{ article.html }}
+</div>

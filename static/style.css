@@ -1,5 +1,4 @@
-body
-{
+body {
     background-color: white;
     font-size: 12pt;
     font-family: Arial, Verdana, Helvetica, sans serif;
@@ -7,15 +6,13 @@ body
     line-height: 1.5em;
 }
 
-.header
-{
+.header {
 /*    background-color: lightgrey; */
     padding-top: 2em;
     padding-bottom: 0;
 }
 
-.header h1
-{
+.header h1 {
     margin: 0;
 }
 
@@ -38,59 +35,55 @@ body
     display: inline-block;
 }
 
-h1 a
-{
+h1 a {
     text-decoration: none;
 }
 
-h2 a
-{
+h2 a {
     text-decoration: none;
 }
 
-p {
-}
-
-.content
-{
-    /*padding-left: 2em;*/
-    /*padding-right: 2em;*/
-    padding-top: 1em;
-/*    background-color: lightblue; */
-}
-
-h2
-{
+h2 {
     margin: 0;
 }
 
-.content .article
-{
+.content {
+    /*padding-left: 2em;*/
+    /*padding-right: 2em;*/
+    /*padding-top: 1em;*/	
+/*    background-color: lightblue; */
+}
+
+.content .article {
     padding-bottom: 2em;
 }
 
-.article_info
-{
+.article_info {
     font-size: 75%;
 }
 
-.tag
-{
+.tag {
     background-color: lightblue;
     border-radius: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
 
-.timestamp
-{
+.timestamp {
     color: gray;
 }
 
-/* Footer */
+/* Info block */
+
+.info_mini_container {
+    padding-top: 0em;
+    padding-bottom: 0em;
+    width: 100%;
+    background-color: lightgrey;
+}
 
 .info_container {
-    padding-top: 1em;
+    padding-top: 2em;
     padding-bottom: 1em;
     width: 100%;
     background-color: lightgrey;
@@ -100,6 +93,11 @@ h2
     margin-left: auto;
     margin-right: auto;
     max-width: 50em;
+}
+
+.myself {
+	max-width: 30em;
+	padding-right: 2em;
 }
 
 /* The other stuff */

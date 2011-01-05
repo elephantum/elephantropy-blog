@@ -1,14 +1,26 @@
-<div class="article">
-  <h2><a href="{{ article.path }}">{{ article.title }}</a></h2>
-  
-  <span class="article_info">
-    <span class="timestamp">{{ article.published_when|date:"j F, Y \a\t g:i A" }}</span>
-    <span class="tag_list">
-    {% for tag in article.tags %}
-      <span class="tag">{{ tag }}</span>
-    {% endfor %}
-    </span>
-  </span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{{ blog_name }}</title>
+<link href="/static/style.css" rel="stylesheet" type="text/css"/>
+</head>
 
-  {{ article.html }}
+{% include "inc/analytics.html" %}
+
+<body>
+
+{% include "inc/info_mini.html" %}
+
+<div class="content_container">
+  <div class="content">
+	{% for article in articles %}
+  	  {% include "inc/article.html" %}
+	{% endfor %}
+  </div>
 </div>
+
+{% include "inc/info.html" %}
+
+</body>
+</html>
