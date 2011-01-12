@@ -15,6 +15,7 @@ class Article(db.Model):
     published_when = db.DateTimeProperty(auto_now_add=True)
     tags = db.ListProperty(db.Category)
     id = db.IntegerProperty()
+    strid = db.StringProperty()
     draft = db.BooleanProperty(required=True, default=False)
 
     @classmethod

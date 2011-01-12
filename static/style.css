@@ -62,9 +62,21 @@ h2 {
     font-size: 75%;
 }
 
+.tag_list {
+	margin-left: 1em;
+}
+
+.tag_list a {
+	text-decoration: none;
+}
+
 .tag {
+	text-decoration: none;
     background-color: lightblue;
     border-radius: 1em;
+    border-color: blue;
+    border-width: 1px;
+    border-style: outset;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
