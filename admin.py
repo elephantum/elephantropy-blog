@@ -51,13 +51,18 @@ class SaveArticleHandler(request.BlogRequestHandler):
     Handles form submissions to save an edited article.
     """
     def post(self):
-        title = cgi.escape(self.request.get('title'))
-        body = cgi.escape(self.request.get('content'))
         s_id = cgi.escape(self.request.get('id'))
         id = int(s_id) if s_id else None
+
+        slug = cgi.escape(self.request.get('slug'))
+
+        title = cgi.escape(self.request.get('title'))
+        body = cgi.escape(self.request.get('content'))
+
         tags = cgi.escape(self.request.get('tags'))
         published_when = cgi.escape(self.request.get('published_when'))
         draft = cgi.escape(self.request.get('draft'))
+
         if tags:
             tags = [t.strip() for t in tags.split(',')]
         else:
@@ -73,16 +78,19 @@ class SaveArticleHandler(request.BlogRequestHandler):
         if article:
             # It's an edit of an existing item.
             just_published = article.draft and (not draft)
+            article.slug = slug
             article.title = title
             article.body = body
             article.tags = tags
             article.draft = draft
         else:
             # It's new.
-            article = Article(title=title,
-                              body=body,
-                              tags=tags,
-                              draft=draft)
+            article = Article(
+                slug=slug,
+                title=title,
+                body=body,
+                tags=tags,
+                draft=draft)
             just_published = not draft
 
         article.save()

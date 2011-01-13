@@ -20,7 +20,7 @@ TEMPLATE_SUBDIR = 'templates'
 
 TAG_URL_PATH = 'tag'
 DATE_URL_PATH = 'date'
-ARTICLE_URL_PATH = 'id'
+ARTICLE_URL_PATH = 'article'
 MEDIA_URL_PATH = 'static'
 ATOM_URL_PATH = 'atom'
 RSS2_URL_PATH = 'rss2'

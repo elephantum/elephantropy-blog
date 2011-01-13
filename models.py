@@ -10,13 +10,16 @@ FETCH_THEM_ALL = ((sys.maxint - 1) >> 32) & 0xffffffff
 
 class Article(db.Model):
 
+    id = db.IntegerProperty()
+    slug = db.StringProperty()
+	
     title = db.StringProperty(required=True)
     body = db.TextProperty()
-    published_when = db.DateTimeProperty(auto_now_add=True)
-    tags = db.ListProperty(db.Category)
-    id = db.IntegerProperty()
-    strid = db.StringProperty()
+    
     draft = db.BooleanProperty(required=True, default=False)
+    published_when = db.DateTimeProperty(auto_now_add=True)
+
+    tags = db.ListProperty(db.Category)
 
     @classmethod
     def get_all(cls):
@@ -28,6 +31,12 @@ class Article(db.Model):
     def get(cls, id):
         q = db.Query(Article)
         q.filter('id = ', id)
+        return q.get()
+
+    @classmethod
+    def get_by_slug(cls, slug):
+        q = db.Query(Article)
+        q.filter('slug = ', slug)
         return q.get()
 
     @classmethod

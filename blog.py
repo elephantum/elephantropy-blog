@@ -152,7 +152,7 @@ class AbstractPageHandler(request.BlogRequestHandler):
                     article.html = rst2html(article.body)
                 except AttributeError:
                     article.html = ''
-            article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.id
+            article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.slug
             article.url = url_prefix + article.path
 
     def render_articles(self,
@@ -280,8 +280,8 @@ class SingleArticleHandler(AbstractPageHandler):
     Handles requests to display a single article, given its unique ID.
     Handles nonexistent IDs.
     """
-    def get(self, id):
-        article = Article.get(int(id))
+    def get(self, slug):
+        article = Article.get_by_slug(slug)
         if article:
             template = 'article.html'
             articles = [article]
@@ -336,7 +336,7 @@ application = webapp.WSGIApplication(
     [('/', FrontPageHandler),
      ('/tag/([^/]+)/*$', ArticlesByTagHandler),
      ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
-     ('/id/(\d+)/?$', SingleArticleHandler),
+     ('/%s/([\w\d-]+)/?$' % (defs.ARTICLE_URL_PATH), SingleArticleHandler),
      ('/archive/?$', ArchivePageHandler),
      ('/rss2/?$', RSSFeedHandler),
      ('/.*$', NotFoundPageHandler),

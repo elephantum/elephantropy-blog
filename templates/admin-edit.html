@@ -84,6 +84,13 @@ function cancel_edit()
     <td align="left" width="50%">&nbsp;</td>
   </tr>
   <tr>
+    <td align="left" width="5%">&nbsp;</td>
+    <td align="left" colspan="2" width="45%">
+    Slug:&nbsp;<input type="text" align="left" width="80" name="slug" value="{{ article.slug }}"/>
+    </td>
+    <td align="left" width="50%">&nbsp;</td>
+  </tr>
+  <tr>
     <td align="right" width="5%">&nbsp;
       {% if article.draft %}
       <input type="checkbox" name="draft" checked="true"/>
