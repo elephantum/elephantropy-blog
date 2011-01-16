@@ -12,7 +12,7 @@ class Article(db.Model):
 
     id = db.IntegerProperty()
     slug = db.StringProperty()
-	
+    
     title = db.StringProperty(required=True)
     body = db.TextProperty()
     

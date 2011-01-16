@@ -5,12 +5,8 @@ items in the blog.
 
 __docformat__ = 'restructuredtext'
 
-import logging
-import os
-import sys
 import math
 import random
-import datetime
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -189,7 +185,6 @@ class AbstractPageHandler(request.BlogRequestHandler):
         date_path = '/' + defs.DATE_URL_PATH
         date_url = url_prefix + date_path
         media_path = '/' + defs.MEDIA_URL_PATH
-        media_url = url_prefix + media_path
         
         template_variables = {
             'defs'         : defs,

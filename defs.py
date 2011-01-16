@@ -33,7 +33,7 @@ DEV_MODE = not ON_GAE
 
 ### Google Analytics
 
-GA_KEY = ''
+GA_KEY = 'UA-18937217-2'
 
 ### Disqus comments
 

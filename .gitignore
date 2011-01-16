@@ -6,4 +6,5 @@ docutils/
 picoblog.esproj/
 pygments/
 roman.py
-
+.project
+.pydevproject
