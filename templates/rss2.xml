@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>{{ blog_name }}</title>
+    <title>{{ defs.BLOG_NAME }}</title>
     <link>{{ blog_url }}</link>
-    <description>{{ blog_name }}</description>
+    <description>{{ defs.BLOG_NAME }}</description>
     <pubDate>{{ last_updated|date:"D, d M Y H:i:s T" }}</pubDate>
     {% for article in articles %}
     <item>

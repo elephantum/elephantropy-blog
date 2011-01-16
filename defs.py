@@ -1,20 +1,12 @@
 # $Id$
-#
-# Constants used by this application
-
-# -----------------------------------------------------------------------------
-# Imports
-# -----------------------------------------------------------------------------
 
 import os
 
-# -----------------------------------------------------------------------------
-# Constants
-# -----------------------------------------------------------------------------
+###
 
-BLOG_NAME = 'Elephant entropy'
-CANONICAL_BLOG_URL = 'http://elephantropy.appspot.com/'
-BLOG_OWNER = 'Joe Example'
+BLOG_NAME = 'Elephantropy Blog'
+CANONICAL_BLOG_URL = 'http://elephantropy-blog.appspot.com/'
+BLOG_OWNER = 'Andrey Tatarinov'
 
 TEMPLATE_SUBDIR = 'templates'
 
@@ -29,20 +21,27 @@ ARCHIVE_URL_PATH = 'archive'
 MAX_ARTICLES_PER_PAGE = 5
 TOTAL_RECENT = 10
 
-_server_software = os.environ.get('SERVER_SOFTWARE','').lower()
-if _server_software.startswith('goog'):
-    ON_GAE = True
-else:
-    ON_GAE = False
-del _server_software
+def _get_on_gae():
+    _server_software = os.environ.get('SERVER_SOFTWARE','').lower()
+    if _server_software.startswith('goog'):
+        return True
+    else:
+        return False
+
+ON_GAE = _get_on_gae()
+DEV_MODE = not ON_GAE
+
+### Google Analytics
 
 GA_KEY = ''
 
-# -----------------------------------------------------------------------------
-# Constants
-# -----------------------------------------------------------------------------
+### Disqus comments
+
+DISQUS = True
+DISQUS_SHORTNAME = 'elephantropy-blog-appspot-com'
+
+###
 
 PING_TECHNORATI = False
 TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
 FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock/'
-

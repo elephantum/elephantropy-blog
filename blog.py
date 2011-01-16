@@ -1,15 +1,9 @@
-# $Id$
-
 """
 Google App Engine Script that handles display of the published
 items in the blog.
 """
 
 __docformat__ = 'restructuredtext'
-
-# -----------------------------------------------------------------------------
-# Imports
-# -----------------------------------------------------------------------------
 
 import logging
 import os
@@ -18,7 +12,6 @@ import math
 import random
 import datetime
 
-# Google AppEngine imports
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
@@ -28,9 +21,6 @@ from rst import rst2html
 import defs
 import request
 
-# -----------------------------------------------------------------------------
-# Classes
-# -----------------------------------------------------------------------------
 
 class DateCount(object):
     """
@@ -39,18 +29,19 @@ class DateCount(object):
     def __init__(self, date, count):
         self.date = date
         self.count = count
-
+    
     def __cmp__(self, other):
         return cmp(self.date, other.date)
-
+    
     def __hash__(self):
         return self.date.__hash__()
-
+    
     def __str__(self):
         return '%s(%d)' % (self.date, self.count)
-
+    
     def __repr__(self):
         return '<%s: %s>' % (self.__class__.__name__, str(self))
+
 
 class TagCount(object):
     """
@@ -61,12 +52,13 @@ class TagCount(object):
         self.count = count
         self.tag = tag
 
+
 class AbstractPageHandler(request.BlogRequestHandler):
     """
     Abstract base class for all handlers in this module. Basically,
     this class exists to consolidate common logic.
     """
-
+    
     def get_tag_counts(self):
         """
         Get tag counts and calculate tag cloud frequencies.
@@ -78,16 +70,16 @@ class AbstractPageHandler(request.BlogRequestHandler):
         result = []
         if tag_counts:
             maximum = max(tag_counts.values())
-
+            
             for tag, count in tag_counts.items():
                 tc = TagCount(tag, count)
-
+                
                 # Determine the popularity of this term as a percentage.
-
+                
                 percent = math.floor((tc.count * 100) / maximum)
-
+                
                 # determine the CSS class for this term based on the percentage
-
+                
                 if percent <= 20:
                     tc.css_class = 'tag-cloud-tiny'
                 elif 20 < percent <= 40:
@@ -100,10 +92,10 @@ class AbstractPageHandler(request.BlogRequestHandler):
                     tc.css_class = 'tag-cloud-huge'
                     
                 result.append(tc)
-
+        
         random.shuffle(result)
         return result
-
+    
     def get_month_counts(self):
         """
         Get date counts, sorted in reverse chronological order.
@@ -120,12 +112,12 @@ class AbstractPageHandler(request.BlogRequestHandler):
                 date_count[just_date] += hash[dt]
             except KeyError:
                 date_count[just_date] = hash[dt]
-
+        
         dates = date_count.keys()
         dates.sort()
         dates.reverse()
         return [DateCount(date, date_count[date]) for date in dates]
-
+    
     def augment_articles(self, articles, url_prefix, html=True):
         """
         Augment the ``Article`` objects in a list with the expanded
@@ -154,7 +146,7 @@ class AbstractPageHandler(request.BlogRequestHandler):
                     article.html = ''
             article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.slug
             article.url = url_prefix + article.path
-
+    
     def render_articles(self,
                         articles,
                         request,
@@ -183,14 +175,14 @@ class AbstractPageHandler(request.BlogRequestHandler):
         port = request.environ['SERVER_PORT']
         if port:
             url_prefix += ':%s' % port
-
+        
         self.augment_articles(articles, url_prefix)
         self.augment_articles(recent, url_prefix, html=False)
-
+        
         last_updated = datetime.datetime.now()
         if articles:
             last_updated = articles[0].published_when
-
+        
         blog_url = url_prefix
         tag_path = '/' + defs.TAG_URL_PATH
         tag_url = url_prefix + tag_path
@@ -198,10 +190,10 @@ class AbstractPageHandler(request.BlogRequestHandler):
         date_url = url_prefix + date_path
         media_path = '/' + defs.MEDIA_URL_PATH
         media_url = url_prefix + media_path
-
+        
         template_variables = {
-        	'blog_name'    : defs.BLOG_NAME,
-			'blog_owner'   : defs.BLOG_OWNER,
+            'defs'         : defs,
+            
             'tag_list'     : self.get_tag_counts(),
             'date_list'    : self.get_month_counts(),
             'version'      : '0.3',
@@ -219,9 +211,9 @@ class AbstractPageHandler(request.BlogRequestHandler):
             
         	'articles'     : articles,
             }
-
+        
         return self.render_template(template_name, template_variables)
-
+    
     def get_recent(self):
         """
         Get up to ``defs.TOTAL_RECENT`` recent articles.
@@ -230,14 +222,15 @@ class AbstractPageHandler(request.BlogRequestHandler):
         :return: list of recent ``Article`` objects
         """
         articles = Article.published()
-
+        
         total_recent = min(len(articles), defs.TOTAL_RECENT)
         if articles:
             recent = articles[0:total_recent]
         else:
             recent = []
-
+        
         return recent
+
 
 class FrontPageHandler(AbstractPageHandler):
     """
@@ -253,6 +246,7 @@ class FrontPageHandler(AbstractPageHandler):
                                                      self.get_recent(),
                                                      template_name='index.html'))
 
+
 class ArticlesByTagHandler(AbstractPageHandler):
     """
     Handles requests to display a set of articles that have a
@@ -265,6 +259,7 @@ class ArticlesByTagHandler(AbstractPageHandler):
                                                      self.get_recent(),
                                                      template_name='index.html'))
 
+
 class ArticlesForMonthHandler(AbstractPageHandler):
     """
     Handles requests to display a set of articles that were published
@@ -276,6 +271,7 @@ class ArticlesForMonthHandler(AbstractPageHandler):
                                                      self.request,
                                                      self.get_recent(),
                                                      template_name='index.html'))
+
 
 class SingleArticleHandler(AbstractPageHandler):
     """
@@ -297,6 +293,7 @@ class SingleArticleHandler(AbstractPageHandler):
                                                      recent=self.get_recent(),
                                                      template_name=template))
 
+
 class ArchivePageHandler(AbstractPageHandler):
     """
     Handles requests to display the list of all articles in the blog.
@@ -307,6 +304,7 @@ class ArchivePageHandler(AbstractPageHandler):
                                                      self.request,
                                                      [],
                                                      'archive.html'))
+
 
 class RSSFeedHandler(AbstractPageHandler):
     """
@@ -320,6 +318,7 @@ class RSSFeedHandler(AbstractPageHandler):
                                                      [],
                                                      'rss2.xml'))
 
+
 class NotFoundPageHandler(AbstractPageHandler):
     """
     Handles pages that aren't found.
@@ -330,9 +329,6 @@ class NotFoundPageHandler(AbstractPageHandler):
                                                      [],
                                                      'not-found.html'))
 
-# -----------------------------------------------------------------------------
-# Main program
-# -----------------------------------------------------------------------------
 
 application = webapp.WSGIApplication(
     [('/', FrontPageHandler),

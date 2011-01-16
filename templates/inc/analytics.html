@@ -1,5 +1,5 @@
-{% ifequal host "google" %}
-{% if ga_key %}
+{% if not DEV_MODE %}
+{% if defs.GA_KEY %}
 <!-- Google Analytics -->
 
 <script type="text/javascript">
@@ -7,10 +7,10 @@ var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "htt
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
-var pageTracker = _gat._getTracker("{{ ga_key }}");
+var pageTracker = _gat._getTracker("{{ defs.GA_KEY }}");
 pageTracker._trackPageview();
 </script>
 
 <!-- End Google Analytics -->
 {% endif %}
-{% endifequal %}
+{% endif %}
