@@ -2,3 +2,8 @@
 
 *.pyc
 .DS_Store
+docutils/
+picoblog.esproj/
+pygments/
+roman.py
+

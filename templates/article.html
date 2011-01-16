@@ -10,14 +10,14 @@
 
 <body>
 
-{% include "inc/info_mini.html" %}
+{# {% include "inc/info_mini.html" %} #}
 
 <div class="content_container">
-  <div class="content">
-	{% for article in articles %}
-  	  {% include "inc/article.html" %}
-	{% endfor %}
-  </div>
+    <div class="content">
+        {% for article in articles %}
+            {% include "inc/article-full.html" %}
+	    {% endfor %}
+    </div>
 </div>
 
 {% include "inc/info.html" %}

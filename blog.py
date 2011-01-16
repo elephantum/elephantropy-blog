@@ -262,7 +262,8 @@ class ArticlesByTagHandler(AbstractPageHandler):
         articles = Article.all_for_tag(tag)
         self.response.out.write(self.render_articles(articles,
                                                      self.request,
-                                                     self.get_recent()))
+                                                     self.get_recent(),
+                                                     template_name='index.html'))
 
 class ArticlesForMonthHandler(AbstractPageHandler):
     """
@@ -273,7 +274,8 @@ class ArticlesForMonthHandler(AbstractPageHandler):
         articles = Article.all_for_month(int(year), int(month))
         self.response.out.write(self.render_articles(articles,
                                                      self.request,
-                                                     self.get_recent()))
+                                                     self.get_recent(),
+                                                     template_name='index.html'))
 
 class SingleArticleHandler(AbstractPageHandler):
     """
@@ -336,7 +338,7 @@ application = webapp.WSGIApplication(
     [('/', FrontPageHandler),
      ('/tag/([^/]+)/*$', ArticlesByTagHandler),
      ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
-     ('/%s/([\w\d-]+)/?$' % (defs.ARTICLE_URL_PATH), SingleArticleHandler),
+     ('/article/([\w\d-]+)/?$', SingleArticleHandler),
      ('/archive/?$', ArchivePageHandler),
      ('/rss2/?$', RSSFeedHandler),
      ('/.*$', NotFoundPageHandler),
