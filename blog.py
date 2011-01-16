@@ -144,7 +144,7 @@ class AbstractPageHandler(request.BlogRequestHandler):
                     article.html = rst2html(article.body)
                 except AttributeError:
                     article.html = ''
-            article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.slug
+            article.path = '/%s/%s.html' % (defs.ARTICLE_URL_PATH, article.slug)
             article.url = url_prefix + article.path
     
     def render_articles(self,
@@ -196,7 +196,6 @@ class AbstractPageHandler(request.BlogRequestHandler):
             
             'tag_list'     : self.get_tag_counts(),
             'date_list'    : self.get_month_counts(),
-            'version'      : '0.3',
             'last_updated' : last_updated,
             'blog_path'    : '/',
             'blog_url'     : blog_url,
@@ -334,7 +333,7 @@ application = webapp.WSGIApplication(
     [('/', FrontPageHandler),
      ('/tag/([^/]+)/*$', ArticlesByTagHandler),
      ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
-     ('/article/([\w\d-]+)/?$', SingleArticleHandler),
+     ('/article/([\w\d-]+)\.html$', SingleArticleHandler),
      ('/archive/?$', ArchivePageHandler),
      ('/rss2/?$', RSSFeedHandler),
      ('/.*$', NotFoundPageHandler),
