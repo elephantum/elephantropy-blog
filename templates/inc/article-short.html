@@ -1,15 +1,18 @@
 <div class="article">
-  <h2><a href="{{ article.path }}">{{ article.title }}</a></h2>
+	<h2><a href="{{ article.path }}">{{ article.title }}</a></h2>
   
-  <span class="article_info">
-    <span class="timestamp">{{ article.published_when|date:"j F, Y" }}</span>
-    <span class="tag_list">
-    {% for tag in article.tags %}
-      <a href="/tag/{{ tag }}"><span class="tag">{{ tag }}</span></a>
-    {% endfor %}
-    </span>
-  </span>
+	<span class="article_info">
+		<span class="timestamp">{{ article.published_when|date:"j F, Y" }}</span>
+		<span class="tag_list">
+			{% for tag in article.tags %}
+				<a href="/tag/{{ tag }}"><span class="tag">{{ tag }}</span></a>
+			{% endfor %}
+		</span>
+	</span>
 
-  {{ article.html }}
+	{{ article.html }}
 
+	<div>
+		<a href="{{ article.path }}#disqus_thread" data-disqus-identifier="blog_{{ article.slug }}">Comments</a>
+	</div>
 </div>
