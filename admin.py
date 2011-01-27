@@ -134,6 +134,7 @@ class DeleteArticleHandler(request.BlogRequestHandler):
 
         self.redirect('/admin/')
 
+
 # -----------------------------------------------------------------------------
 # Functions
 # -----------------------------------------------------------------------------
@@ -171,9 +172,9 @@ def alert_the_media():
 application = webapp.WSGIApplication(
     [('/admin/?', ShowArticlesHandler),
      ('/admin/article/new/?', NewArticleHandler),
+     ('/admin/article/edit/?', EditArticleHandler),
      ('/admin/article/delete/?', DeleteArticleHandler),
      ('/admin/article/save/?', SaveArticleHandler),
-     ('/admin/article/edit/?', EditArticleHandler),
      ],
 
     debug=True)

@@ -33,7 +33,8 @@ DEV_MODE = not ON_GAE
 
 ### Google Analytics
 
-GA_KEY = 'UA-18937217-2'
+GA_KEY = 'UA-18937217-3'
+# GA_KEY = 'UA-18937217-2' # elephantropy-blog.appspot.com
 
 ### Disqus comments
 

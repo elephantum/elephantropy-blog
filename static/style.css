@@ -126,6 +126,17 @@ h2 {
 	padding-right: 2em;
 }
 
+.photo-placeholder {
+	width: 100px; 
+	height: 100px; 
+	background-color: darkgrey; 
+	display: block; 
+	float: left; 
+	margin-right: 1em; 
+	margin-bottom: 1em;
+	padding: 0.5em;
+}
+
 /* The other stuff */
 
 h1.admin-page-title

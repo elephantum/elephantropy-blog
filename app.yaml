@@ -13,12 +13,14 @@ handlers:
 
 - url: /admin
   script: admin.py
-  #login: admin
+  login: admin
 
 - url: /admin/.*
   script: admin.py
-  #login: admin
+  login: admin
 
 - url: /.*
   script: blog.py
 
+builtins:
+- remote_api: on
