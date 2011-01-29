@@ -6,6 +6,22 @@ body {
     line-height: 1.5em;
 }
 
+a {
+    text-decoration: none;
+    margin-left: -0.4em;
+    padding-left: 0.4em;
+    margin-right: -0.4em;
+    padding-right: 0.4em;
+    margin-top: -0.2em;
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+    padding-bottom: 0.2em;
+}
+
+a:hover {
+	background-color: lightblue;
+}
+
 a:link {
     color: darkblue;
 }
@@ -30,14 +46,6 @@ a:visited {
     padding: 1em;
     background-color: lightgrey;
     display: inline-block;
-}
-
-h1 a {
-    text-decoration: none;
-}
-
-h2 a {
-    text-decoration: none;
 }
 
 h2 {
@@ -72,25 +80,16 @@ h2 {
 	margin-left: 1em;
 }
 
+/*
 .tag_list a {
 	text-decoration: none;
+	background-color: lightgrey;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
 }
-
-.tag_list a:link {
-    color: black;
-}
-
-.tag_list a:visited {
-    color: black;
-}
-
-.tag {
-	text-decoration: none;
-    background-color: lightgrey;
-    border-radius: 1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-}
+*/
 
 .timestamp {
     color: gray;
