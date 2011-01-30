@@ -4,15 +4,19 @@
     {% endif %}
   
 
-  {{ article.html }}
+ 	{{ article.html }}
 
+	{% if article.tags %}
+		<div>
+	        <span class="tag_list">
+	        {% for tag in article.tags %}
+	            <a href="/tag/{{ tag }}"><span class="tag">{{ tag }}</span></a>
+	        {% endfor %}
+	        </span>
+        </div>
+	{% endif %}
     <span class="article_info">
         <span class="timestamp">{{ article.published_when|date:"j F, Y" }}</span>
-        <span class="tag_list left_spaced">
-        {% for tag in article.tags %}
-            <a href="/tag/{{ tag }}"><span class="tag">{{ tag }}</span></a>
-        {% endfor %}
-        </span>
     </span>
 
 </div>

@@ -72,24 +72,32 @@ h2 {
     padding-bottom: 2em;
 }
 
-.article_info {
-    font-size: 75%;
-}
-
 .left_spaced {
 	margin-left: 1em;
 }
 
-/*
+.tag_list {
+	font-size: 75%;
+}
+
 .tag_list a {
 	text-decoration: none;
+
+	color: white;
 	background-color: lightgrey;
+
 	padding-left: 0.5em;
 	padding-right: 0.5em;
-	padding-top: 0.3em;
-	padding-bottom: 0.3em;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+	border-radius: 1em;
+	margin: 0;
+	margin-right: 0.1em;
 }
-*/
+
+.tag_list a:hover {
+	background-color: lightblue;
+}
 
 .timestamp {
     color: gray;

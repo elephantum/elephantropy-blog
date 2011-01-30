@@ -5,15 +5,20 @@
   
 	{{ article.html }}
 
-	<span class="article_info">
-		<span class="">
-			<a href="{{ article.path }}" data-disqus-identifier="blog_{{ article.slug }}">Comments</a>
-		</span>
-		<span class="timestamp left_spaced">{{ article.published_when|date:"j F, Y" }}</span>
-		<span class="tag_list left_spaced">
+	{% if article.tags %}
+	<div>
+		<span class="tag_list">
 			{% for tag in article.tags %}
 				<a href="/tag/{{ tag }}">{{ tag }}</a>
 			{% endfor %}
+		</span>
+	</div>
+	{% endif %}
+	
+	<span class="article_info">
+		<span class="timestamp">{{ article.published_when|date:"j F, Y" }}</span>
+		<span class="left_spaced">
+			<a href="{{ article.path }}#disqus_thread" data-disqus-identifier="blog_{{ article.slug }}">Comments</a>
 		</span>
 	</span>
 </div>
