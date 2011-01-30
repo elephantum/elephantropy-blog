@@ -25,18 +25,6 @@ String.prototype.rtrim = function()
 
 function save_article()
 {
-    if (document.article.title.value.trim() == '')
-    {
-        alert("You must supply a title.")
-        return
-    }
-
-    if (document.article.content.value.trim() == '')
-    {
-        alert("You must supply content.")
-        return
-    }
-
     document.article.action = "/admin/article/save/"
     document.article.submit()
 }

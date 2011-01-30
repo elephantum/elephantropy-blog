@@ -44,8 +44,10 @@ function new_article()
   {% else %}
   <li class="admin-published">
   {% endif %}
-  {{ article.published_when|date:"j F, Y" }}&nbsp;
-  <a href="/admin/article/edit/?id={{ article.id }}">{{ article.title }}</a>
+  <a href="/admin/article/edit/?id={{ article.id }}">
+  	{{ article.published_when|date:"j F, Y" }}&nbsp;
+  	{{ article.title }}
+  </a>
 {% endfor %}
 </ul>
 

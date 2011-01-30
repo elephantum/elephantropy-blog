@@ -13,10 +13,10 @@ class Article(db.Model):
     id = db.IntegerProperty()
     slug = db.StringProperty()
     
-    title = db.StringProperty(required=True)
+    title = db.StringProperty()
     body = db.TextProperty()
     
-    draft = db.BooleanProperty(required=True, default=False)
+    draft = db.BooleanProperty(default=False)
     published_when = db.DateTimeProperty(auto_now_add=True)
 
     tags = db.ListProperty(db.Category)
