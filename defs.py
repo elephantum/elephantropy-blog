@@ -2,10 +2,23 @@
 
 import os
 
+def _get_on_gae():
+    _server_software = os.environ.get('SERVER_SOFTWARE','').lower()
+    if _server_software.startswith('goog'):
+        return True
+    else:
+        return False
+
+# TODO cleanup these defs
+ON_GAE = _get_on_gae()
+PROD_MODE = ON_GAE
+DEV_MODE = not ON_GAE
+
 ###
 
+CANONICAL_BLOG_URL = 'http://blog.elephantropy.com'  
+    
 BLOG_NAME = 'Elephantropy Blog'
-CANONICAL_BLOG_URL = 'http://elephantropy-blog.appspot.com/'
 BLOG_OWNER = 'Andrey Tatarinov'
 
 TEMPLATE_SUBDIR = 'templates'
@@ -20,16 +33,6 @@ ARCHIVE_URL_PATH = 'archive'
 
 MAX_ARTICLES_PER_PAGE = 5
 TOTAL_RECENT = 10
-
-def _get_on_gae():
-    _server_software = os.environ.get('SERVER_SOFTWARE','').lower()
-    if _server_software.startswith('goog'):
-        return True
-    else:
-        return False
-
-ON_GAE = _get_on_gae()
-DEV_MODE = not ON_GAE
 
 ### Google Analytics
 

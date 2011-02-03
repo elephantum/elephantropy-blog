@@ -7,13 +7,13 @@ __docformat__ = 'restructuredtext'
 
 import math
 import random
+import markdown
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
 from models import *
-from rst import rst2html
 import defs
 import request
 
@@ -137,11 +137,11 @@ class AbstractPageHandler(request.BlogRequestHandler):
         for article in articles:
             if html:
                 try:
-                    article.html = rst2html(article.body)
+                    article.html = markdown.markdown(article.body)
                 except AttributeError:
                     article.html = ''
             article.path = '/%s/%s.html' % (defs.ARTICLE_URL_PATH, article.slug)
-            article.url = url_prefix + article.path
+            article.url = url_prefix.strip('/') + article.path
     
     def render_articles(self,
                         articles,
@@ -167,10 +167,13 @@ class AbstractPageHandler(request.BlogRequestHandler):
         :rtype: str
         :return: the rendered articles
         """
-        url_prefix = 'http://' + request.environ['SERVER_NAME']
-        port = request.environ['SERVER_PORT']
-        if port:
-            url_prefix += ':%s' % port
+        if defs.PROD_MODE:
+            url_prefix = defs.CANONICAL_BLOG_URL
+        else:
+            url_prefix = 'http://' + request.environ['SERVER_NAME']
+            port = request.environ['SERVER_PORT']
+            if port:
+                url_prefix += ':%s' % port
         
         self.augment_articles(articles, url_prefix)
         self.augment_articles(recent, url_prefix, html=False)
