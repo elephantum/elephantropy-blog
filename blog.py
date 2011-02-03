@@ -140,7 +140,7 @@ class AbstractPageHandler(request.BlogRequestHandler):
                     article.html = markdown.markdown(article.body)
                 except AttributeError:
                     article.html = ''
-            article.path = '/%s/%s.html' % (defs.ARTICLE_URL_PATH, article.slug)
+            article.path = '/%s.html' % (article.slug,)
             article.url = url_prefix.strip('/') + article.path
     
     def render_articles(self,
@@ -329,9 +329,9 @@ class NotFoundPageHandler(AbstractPageHandler):
 
 application = webapp.WSGIApplication(
     [('/', FrontPageHandler),
+     ('/([\w\d-]+)\.html$', SingleArticleHandler),
      ('/tag/([^/]+)/*$', ArticlesByTagHandler),
      ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
-     ('/article/([\w\d-]+)\.html$', SingleArticleHandler),
      ('/archive/?$', ArchivePageHandler),
      ('/rss2/?$', RSSFeedHandler),
      ('/.*$', NotFoundPageHandler),
